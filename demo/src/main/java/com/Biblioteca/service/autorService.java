@@ -24,4 +24,6 @@ public class autorService {
     public List<Object[]> buscarPorNombre(String nombre){
     	return autorRepositorio.buscarPorNombre(nombre);
     }
+    
+
 }

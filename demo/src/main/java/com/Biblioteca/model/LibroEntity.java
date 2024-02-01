@@ -10,26 +10,26 @@ import java.util.Date;
 public class LibroEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idLibro")
-	private int idLibro;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idLibro")
+    private int idLibro;
 
-	private String titulo;
+    private String titulo;
 
-	private String autor;
+    @ManyToOne
+    @JoinColumn(name = "idautor")
+    private AutorEntity autor;
 
-	@ManyToOne
-	@JoinColumn(name = "autor_id")
-	private AutorEntity autorEntity;
+    private String descripcion;
 
-	private String descripcion;
+    @ManyToOne
+    @JoinColumn(name = "idgenero")
+    private GenerosEntity genero;
 
-	private String genero;
+    private boolean leido;
 
-	private boolean leido;
-
-	@Temporal(TemporalType.DATE)
-	private Date fechaLectura;
+    @Temporal(TemporalType.DATE)
+    private Date fechaLectura;
 
 	@Column(name = "portada")
 	private byte[] portada;
@@ -50,20 +50,12 @@ public class LibroEntity {
 		this.titulo = titulo;
 	}
 
-	public String getAutor() {
+	public AutorEntity getAutor() {
 		return autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(AutorEntity autor) {
 		this.autor = autor;
-	}
-
-	public AutorEntity getAutorEntity() {
-		return autorEntity;
-	}
-
-	public void setAutorEntity(AutorEntity autorEntity) {
-		this.autorEntity = autorEntity;
 	}
 
 	public String getDescripcion() {
@@ -74,11 +66,11 @@ public class LibroEntity {
 		this.descripcion = descripcion;
 	}
 
-	public String getGenero() {
+	public GenerosEntity getGenero() {
 		return genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(GenerosEntity genero) {
 		this.genero = genero;
 	}
 
@@ -106,11 +98,6 @@ public class LibroEntity {
 		this.portada = portada;
 	}
 
-	@Override
-	public String toString() {
-		return "LibroEntity [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", autorEntity="
-				+ autorEntity + ", descripcion=" + descripcion + ", genero=" + genero + ", leido=" + leido
-				+ ", fechaLectura=" + fechaLectura + ", portada=" + Arrays.toString(portada) + "]";
-	}
+
 
 }

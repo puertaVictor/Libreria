@@ -1,19 +1,25 @@
 package com.Biblioteca.model;
+
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "generos")
+@Table(name = "genero")
 public class GenerosEntity {
-
     @Id
-    @Column(name = "idGenero")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idgenero")
     private int idGenero;
 
-    private String genero;
+    @ManyToOne
+    @JoinColumn(name = "idautor")
+    private AutorEntity autor;
 
     @ManyToOne
-    @JoinColumn(name = "idAutor")
-    private AutorEntity autorEntity;
+    @JoinColumn(name = "idlibro")
+    private LibroEntity libro;
+
+    private String nombreGenero;
 
 	public int getIdGenero() {
 		return idGenero;
@@ -23,26 +29,29 @@ public class GenerosEntity {
 		this.idGenero = idGenero;
 	}
 
-	public String getGenero() {
-		return genero;
+	public AutorEntity getAutor() {
+		return autor;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setAutor(AutorEntity autor) {
+		this.autor = autor;
 	}
 
-	public AutorEntity getAutorEntity() {
-		return autorEntity;
+	public LibroEntity getLibro() {
+		return libro;
 	}
 
-	public void setAutorEntity(AutorEntity autorEntity) {
-		this.autorEntity = autorEntity;
+	public void setLibro(LibroEntity libro) {
+		this.libro = libro;
 	}
 
-	@Override
-	public String toString() {
-		return "GenerosEntity [idGenero=" + idGenero + ", genero=" + genero + ", autorEntity=" + autorEntity + "]";
+	public String getNombreGenero() {
+		return nombreGenero;
 	}
 
-  
+	public void setNombreGenero(String nombreGenero) {
+		this.nombreGenero = nombreGenero;
+	}
+
+    
 }

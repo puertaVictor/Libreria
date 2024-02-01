@@ -1,26 +1,23 @@
 package com.Biblioteca.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.util.List;
 
 @Entity
 @Table(name = "autor")
-
 public class AutorEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idautor")
-	private int idAutor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idautor")
+    private int idAutor;
 
-	private String nombre;
+    private String nombre;
 
-	@OneToMany(mappedBy = "autorEntity", cascade = CascadeType.ALL)
-	private List<LibroEntity> libros;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    private List<LibroEntity> libros;
 
-	@OneToMany(mappedBy = "autorEntity", cascade = CascadeType.ALL)
-	private List<GenerosEntity> generos;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    private List<GenerosEntity> generos;
 
 	public int getIdAutor() {
 		return idAutor;
@@ -53,13 +50,6 @@ public class AutorEntity {
 	public void setGeneros(List<GenerosEntity> generos) {
 		this.generos = generos;
 	}
-
-	@Override
-	public String toString() {
-		return "AutorEntity [idAutor=" + idAutor + ", nombre=" + nombre + ", libros=" + libros + ", generos=" + generos
-				+ "]";
-	}
-
 
 
 }
