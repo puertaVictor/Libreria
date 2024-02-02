@@ -21,4 +21,16 @@ public class LibroControlador {
 		List<Object[]> datos = LibroService.buscarPorTitulo(titulo);
 		return datos;
 	}
+	
+	@GetMapping("/buscarLeidos")
+	public List<Object[]> buscarLeidos(){
+		List<Object[]> datos = LibroService.buscarLeidos();
+		return datos;
+	}
+	
+	@GetMapping("/buscarNoLeidos")
+	public List<Object[]> buscarNoLeidos(){
+		List<Object[]> datos = LibroService.buscarNoLeidos();
+		return datos;
+	}
 }

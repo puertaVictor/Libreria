@@ -19,4 +19,12 @@ public class libroService {
     public List<Object[]> buscarPorTitulo(String titulo){
     	return libroRepositorio.buscarPorLibro(titulo);
     }
+    
+    public List<Object[]> buscarLeidos(){
+    	return libroRepositorio.buscarLeidos();
+    }
+    
+    public List<Object[]> buscarNoLeidos(){
+    	return libroRepositorio.buscarNoLeidos();
+    }
 }
