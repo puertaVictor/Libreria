@@ -25,5 +25,7 @@ public class autorService {
     	return autorRepositorio.buscarPorNombre(nombre);
     }
     
-
+    public AutorEntity guardarAutor(AutorEntity autor) {
+    	return autorRepositorio.save(autor);
+    }
 }

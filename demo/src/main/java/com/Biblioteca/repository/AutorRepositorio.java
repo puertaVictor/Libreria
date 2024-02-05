@@ -12,9 +12,9 @@ public interface AutorRepositorio extends JpaRepository<AutorEntity, Integer> {
 
     List<AutorEntity> findAll();
 
-    @Query("SELECT l.titulo, l.descripcion "
+    @Query("SELECT l.titulo, l.descripcion, a.nombre "
             + "FROM AutorEntity a "
-            + "JOIN a.libros l "
+            + "JOIN LibroEntity l ON a.idAutor = l.autor.idAutor "
             + "WHERE a.nombre = :nombre")
     List<Object[]> buscarPorNombre(@Param("nombre") String nombre);
 

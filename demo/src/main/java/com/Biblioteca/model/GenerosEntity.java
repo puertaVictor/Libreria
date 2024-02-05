@@ -10,15 +10,6 @@ public class GenerosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idgenero")
     private int idGenero;
-
-    @ManyToOne
-    @JoinColumn(name = "idautor")
-    private AutorEntity autor;
-
-    @ManyToOne
-    @JoinColumn(name = "idlibro")
-    private LibroEntity libro;
-
     private String nombreGenero;
 
 	public int getIdGenero() {
@@ -27,22 +18,6 @@ public class GenerosEntity {
 
 	public void setIdGenero(int idGenero) {
 		this.idGenero = idGenero;
-	}
-
-	public AutorEntity getAutor() {
-		return autor;
-	}
-
-	public void setAutor(AutorEntity autor) {
-		this.autor = autor;
-	}
-
-	public LibroEntity getLibro() {
-		return libro;
-	}
-
-	public void setLibro(LibroEntity libro) {
-		this.libro = libro;
 	}
 
 	public String getNombreGenero() {

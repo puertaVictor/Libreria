@@ -13,11 +13,6 @@ public class AutorEntity {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    private List<LibroEntity> libros;
-
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    private List<GenerosEntity> generos;
 
 	public int getIdAutor() {
 		return idAutor;
@@ -35,21 +30,6 @@ public class AutorEntity {
 		this.nombre = nombre;
 	}
 
-	public List<LibroEntity> getLibros() {
-		return libros;
-	}
-
-	public void setLibros(List<LibroEntity> libros) {
-		this.libros = libros;
-	}
-
-	public List<GenerosEntity> getGeneros() {
-		return generos;
-	}
-
-	public void setGeneros(List<GenerosEntity> generos) {
-		this.generos = generos;
-	}
 
 
 }

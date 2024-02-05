@@ -32,5 +32,22 @@ public interface LibroRepositorio extends JpaRepository<LibroEntity, Integer> {
 	        + "WHERE l.leido = false")
 	List<Object[]> buscarNoLeidos();
 
+	@Query("SELECT l.portada, l.titulo, l.leido "
+			+"FROM LibroEntity l"
+	)
+	List<Object[]> sacarPortadas();
+	
+	@Query("SELECT l.titulo, l.leido, l.descripcion, l.portada, l.fechaLectura, g.nombreGenero, " +
+	        "(SELECT a.nombre FROM AutorEntity a WHERE a.idAutor = l.autor.idAutor) AS nombreDelAutor " +
+	        "FROM LibroEntity l " +
+	        "INNER JOIN GenerosEntity g ON l.genero.idGenero = g.idGenero " +
+	        "ORDER BY l.fechaLectura ASC")
+	List<Object[]> ordenarPorFechaAsc();
 
+	@Query("SELECT l.titulo, l.leido, l.descripcion, l.portada, l.fechaLectura, g.nombreGenero, " +
+	        "(SELECT a.nombre FROM AutorEntity a WHERE a.idAutor = l.autor.idAutor) AS nombreDelAutor " +
+	        "FROM LibroEntity l " +
+	        "INNER JOIN GenerosEntity g ON l.genero.idGenero = g.idGenero " +
+	        "ORDER BY l.fechaLectura DESC")
+	List<Object[]> ordenarPorFechaDesc();
 }
