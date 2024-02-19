@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:8080/libros';
+const baseURL = 'http://localhost:8080/Libro';
 
 
 const BuscarPorTituloService = async (titulo) => {
@@ -64,6 +64,16 @@ const BuscarLeidos = async () => {
     }
   };
 
+  const LibroAleatorio = async () => {
+    try {
+      const response = await axios.get(`${baseURL}/obtenerLibroAleatorio`);
+      return response.data;
+    } catch (error) {
+      console.error('Error al sacar un libro aleatorio:', error);
+      throw error;
+    }
+  };
+
 //   POST MAPPINGS
 
 
@@ -95,4 +105,4 @@ const GuardarLibroService = async (libro) => {
     }
   };
 
-export { BuscarPorTituloService , BuscarLeidos , BuscarNoLeidos, SacarPortadas , OrdenarFechaDescendente , OrdenarFechaAscendente , ActualizarLibroService , GuardarLibroService };
+export { BuscarPorTituloService , BuscarLeidos , BuscarNoLeidos, SacarPortadas , OrdenarFechaDescendente , OrdenarFechaAscendente , ActualizarLibroService , GuardarLibroService , LibroAleatorio  };

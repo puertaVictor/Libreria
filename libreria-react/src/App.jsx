@@ -1,16 +1,44 @@
+// En App.js
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import './App.css'
+import AutorComponent from "./components/AutorComponent";
+import PaginaInicio from './components/PaginaInicio'
 
-function App() {
+const App = () => {
+  const [response, setResponse] = useState("");
+  const [paginaInicio, setPaginaInicio] = useState("");
+
+  const handleSearchSuccess = (response) => {
+    setResponse(response);
+    setPaginaInicio(true);
+  };
+  
+  const inicio = () =>{
+    setPaginaInicio(true);
+  }
+
   return (
     <Router>
-      <Header/>
-
-
+      <div>
+        <Header 
+        onSearchSuccess={handleSearchSuccess} 
+        onInicio={inicio}
+        />
+        <Routes>
+        <Route
+            path="/"
+            element={<PaginaInicio />} 
+          />
+          <Route
+            path="/autorComponent"
+            element={<AutorComponent response={response} />}
+          />
+          {/* Otros Routes aquí */}
+        </Routes>
+      </div>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

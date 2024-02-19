@@ -1,44 +1,52 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { BuscarPorNombre} from '../service/autor_service';
-import { BuscarPorTituloService} from '../service/libro_service';
-import { BuscarPorGenero } from '../service/genero_service';
-import '../css/Header.css';
+import { useNavigate } from "react-router-dom";
+import { BuscarPorNombre } from "../service/autor_service";
+import "../css/Header.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook, faVenusMars, faPerson } from "@fortawesome/free-solid-svg-icons";
 
-const Header = ({ onSearch }) => {
+const Header = ({ onSearchSuccess }) => {
+  const [selectedOption, setSelectedOption] = useState("");
+  const [searchResults, setSearchResults] = useState("");
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState(""); 
 
   const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value); 
+    setSelectedOption(event.target.value);
   };
 
   const handleSearch = async (event) => {
-    event.preventDefault(); 
-    let dato = document.getElementById("datoABuscar").value
+    event.preventDefault();
+    let dato = document.getElementById("datoABuscar").value;
+    let response;
     switch (selectedOption) {
       case "Autores":
         try {
-          const response = await BuscarPorNombre(dato);
-          console.log(response);
+          response = await BuscarPorNombre(dato);
+          setSearchResults(response);
+          onSearchSuccess(response);
+          navigate("/autorComponent");
         } catch (error) {
-          console.error('Error buscando autor por nombre:', error);
+          console.error("Error buscando autor por nombre:", error);
         }
         break;
       case "Libros":
         try {
-          const response = await BuscarPorTituloService(dato);
-          console.log(response);
+          response = await BuscarPorNombre(dato);
+          setSearchResults(response);
+          onSearchSuccess(response);
+          navigate("/libroComponent");
         } catch (error) {
-          console.error('Error buscando libro por título:', error);
+          console.error("Error buscando libro por título:", error);
         }
         break;
       case "Generos":
         try {
-          const response = await BuscarPorGenero(dato);
-          console.log(response);
+          response = await BuscarPorNombre(dato);
+          setSearchResults(response);
+          onSearchSuccess(response);
+          navigate("/generoComponent");
         } catch (error) {
-          console.error('Error buscando género por nombre:', error);
+          console.error("Error buscando género por nombre:", error);
         }
         break;
       default:
@@ -47,31 +55,57 @@ const Header = ({ onSearch }) => {
   };
 
   return (
-    <nav className="header-container">
-      <div className="container-fluid d-flex align-items-center justify-content-between w-100 py-3">
-        <div className="d-flex align-items-center">
-          <select className="form-select me-2" aria-label="" onChange={handleSelectChange} value={selectedOption}>
-            <option disabled value="">Seleccione una opción</option>
-            <option value="Autores">Autores</option>
-            <option value="Libros">Libros</option>
-            <option value="Generos">Géneros</option>
-          </select>
-        </div>
-        <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
-          <input
-            className="form-control me-2 flex-grow-1"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            id="datoABuscar"
-          />
-          <button className="btn btn-outline-success" type="submit">
-            Buscar
-          </button>
-        </form>
-      </div>
-    </nav>
-  );
-};
+        <nav className="header-container">
+          <div className="container-fluid d-flex align-items-center justify-content-between w-100 py-3">
+            <div className="d-flex align-items-center">
+              <select
+                className="form-select me-2"
+                aria-label=""
+                onChange={handleSelectChange}
+                value={selectedOption}
+              >
+                <option disabled value="">
+                  Seleccione una opción
+                </option>
+                <option value="Autores">Autores</option>
+                <option value="Libros">Libros</option>
+                <option value="Generos">Géneros</option>
+              </select>
+            </div>
+            <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
+              <input
+                className="form-control me-2 flex-grow-1"
+                type="search"
+                placeholder="Buscar........"
+                aria-label="Search"
+                id="datoABuscar"
+              />
+              <button
+                id="btnBuscar"
+                className="btn btn-outline-success"
+                type="submit"
+              >
+                Buscar
+              </button>
+            </form>
+          </div>
+    
+          <div id="botones">
+            <button type="button" className="btn btn-outline-warning">
+              <FontAwesomeIcon icon={faBook} size="lg" />
+              <span> Libros</span>
+            </button>
+            <button type="button" className="btn btn-outline-info">
+              <FontAwesomeIcon icon={faVenusMars} size="lg" />
+              <span> Genero</span>
+            </button>
+            <button type="button" className="btn btn-outline-danger">
+              <FontAwesomeIcon icon={faPerson} size="lg" />
+              <span> Autores</span>
+            </button>
+          </div>
+        </nav>
+      );
+    };
 
 export default Header;

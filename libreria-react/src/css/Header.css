@@ -6,3 +6,16 @@
     background-color: #363636; 
     width: 100%;
   }
+
+  #botones button {
+    margin-right: 10px;
+    padding: 10px 20px; 
+    font-size: 18px; 
+    font-weight: bold;
+  }
+
+  #btnBuscar{
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
