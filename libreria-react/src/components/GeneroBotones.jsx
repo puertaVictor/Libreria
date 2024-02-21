@@ -101,7 +101,7 @@ const GeneroBotones = () => {
           </button>
         </div>
       </div>
-      {buscarGenero && (
+      {buscarGenero && buscarGenero.length > 0 ? (
   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: '80px' }}>
     <table style={{ borderCollapse: 'collapse', width: '80%', textAlign: 'center', border: '1px solid #ddd' }}>
       <thead>
@@ -132,10 +132,10 @@ const GeneroBotones = () => {
       </tbody>
     </table>
   </div>
-)}
-
-)}
-
+) : (
+<h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: '80px', color: 'red', fontWeight: 'bold'}}>
+  No hay libros con este género.
+</h3>)}
     </div>
   );
 };
