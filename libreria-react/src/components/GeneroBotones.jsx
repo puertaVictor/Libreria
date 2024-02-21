@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { VerGeneros , BuscarPorGenero } from "../service/genero_service";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'; 
 const GeneroBotones = () => {
   const [listaGeneros, setListaGeneros] = useState(null);
   const [buscarGenero, setBuscarGenero] = useState(null);
+  const [mostrarGeneros, setMostrarGeneros] = useState(false);
 
   useEffect(() => {
     const fetchListaGeneros = async () => {
@@ -24,18 +26,37 @@ const GeneroBotones = () => {
     console.log(response)
   }
 
+  const handleVerGeneros = () =>{
+    setMostrarGeneros(!mostrarGeneros);
+  }
+
+
   if (!listaGeneros) {
     return <p>cargando......</p>;
   }
   return (
     <div className="mt-5 list-group">
-      <h1
-        className="text-center"
-        style={{ color: "red", marginBottom: "250px" }}
-      >
-        Lista de géneros
-      </h1>
-      <div className="carousel-container">
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <button onClick={handleVerGeneros} className="btn btn-primary" style={{ width: "250px", marginBottom: "85px", fontWeight: "bold" }}>
+          {mostrarGeneros ? "Ocultar Géneros" : "Ver Géneros"}
+        </button>
+      </div>
+
+      {mostrarGeneros && (
+        <div style={{ overflowX: "auto",  display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <table>
+            <tbody>
+              <tr>
+                {listaGeneros.map((genero, index) => (
+                  <td key={index} style={{ padding: "10px" }}>{genero.toUpperCase()}</td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      )}
+      
+      <div className="carousel-container" style={{marginTop: "85px",}}>
         <div
           id="carouselExampleInterval"
           className="carousel slide"
@@ -80,6 +101,41 @@ const GeneroBotones = () => {
           </button>
         </div>
       </div>
+      {buscarGenero && (
+  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: '80px' }}>
+    <table style={{ borderCollapse: 'collapse', width: '80%', textAlign: 'center', border: '1px solid #ddd' }}>
+      <thead>
+        <tr style={{ backgroundColor: '#f2f2f2' }}>
+          <th style={{ padding: "15px", borderBottom: '1px solid #ddd' }}>Autor</th>
+          <th style={{ padding: "15px", borderBottom: '1px solid #ddd' }}>Libro</th>
+          <th style={{ padding: "15px", borderBottom: '1px solid #ddd' }}>Leído</th>
+          <th style={{ padding: "15px", borderBottom: '1px solid #ddd' }}>Portada</th> 
+        </tr>
+      </thead>
+      <tbody>
+        {buscarGenero.map((datos, index) => (
+          <tr key={index} style={{ borderBottom: '1px solid #ddd' }}>
+            <td style={{ padding: "15px" }}>{datos[1]}</td>
+            <td style={{ padding: "15px" }}>{datos[0]}</td>
+            <td style={{ padding: "15px" }}>
+              {datos[4] ? (
+                <FontAwesomeIcon icon={faThumbsUp} style={{ color: "#63E6BE" }} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faThumbsDown} style={{ color: "#fb0404" }} size="lg" />
+              )}
+            </td>
+            <td style={{ padding: "15px" }}>
+              <img src={`data:image/jpeg;base64,${datos[3]}`} alt="Portada" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+)}
+
     </div>
   );
 };
