@@ -3,12 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { BuscarPorNombre } from "../service/autor_service";
 import "../css/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faVenusMars, faPerson } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faVenusMars,
+  faPerson,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ onSearchSuccess }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const navigate = useNavigate();
+
+  const handleAutorButtonClick = () => {
+    navigate("/autores");
+  };
+
+  const handleGeneroButtonClick = () => {
+    navigate("/generos");
+  };
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -18,6 +30,7 @@ const Header = ({ onSearchSuccess }) => {
     event.preventDefault();
     let dato = document.getElementById("datoABuscar").value;
     let response;
+
     switch (selectedOption) {
       case "Autores":
         try {
@@ -55,57 +68,61 @@ const Header = ({ onSearchSuccess }) => {
   };
 
   return (
-        <nav className="header-container">
-          <div className="container-fluid d-flex align-items-center justify-content-between w-100 py-3">
-            <div className="d-flex align-items-center">
-              <select
-                className="form-select me-2"
-                aria-label=""
-                onChange={handleSelectChange}
-                value={selectedOption}
-              >
-                <option disabled value="">
-                  Seleccione una opción
-                </option>
-                <option value="Autores">Autores</option>
-                <option value="Libros">Libros</option>
-                <option value="Generos">Géneros</option>
-              </select>
-            </div>
-            <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
-              <input
-                className="form-control me-2 flex-grow-1"
-                type="search"
-                placeholder="Buscar........"
-                aria-label="Search"
-                id="datoABuscar"
-              />
-              <button
-                id="btnBuscar"
-                className="btn btn-outline-success"
-                type="submit"
-              >
-                Buscar
-              </button>
-            </form>
-          </div>
-    
-          <div id="botones">
-            <button type="button" className="btn btn-outline-warning">
-              <FontAwesomeIcon icon={faBook} size="lg" />
-              <span> Libros</span>
-            </button>
-            <button type="button" className="btn btn-outline-info">
-              <FontAwesomeIcon icon={faVenusMars} size="lg" />
-              <span> Genero</span>
-            </button>
-            <button type="button" className="btn btn-outline-danger">
-              <FontAwesomeIcon icon={faPerson} size="lg" />
-              <span> Autores</span>
-            </button>
-          </div>
-        </nav>
-      );
-    };
+    <nav className="header-container">
+      <div className="container-fluid d-flex align-items-center justify-content-between w-100 py-3">
+        <div className="d-flex align-items-center">
+          <select
+            className="form-select me-2"
+            aria-label=""
+            onChange={handleSelectChange}
+            value={selectedOption}
+          >
+            <option disabled value="">
+              Seleccione una opción
+            </option>
+            <option value="Autores">Autores</option>
+            <option value="Libros">Libros</option>
+            <option value="Generos">Géneros</option>
+          </select>
+        </div>
+        <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
+          <input
+            className="form-control me-2 flex-grow-1"
+            type="search"
+            placeholder="Buscar........"
+            aria-label="Search"
+            id="datoABuscar"
+          />
+          <button
+            id="btnBuscar"
+            className="btn btn-outline-success"
+            type="submit"
+          >
+            Buscar
+          </button>
+        </form>
+      </div>
+
+      <div id="botones">
+        <button type="button" className="btn btn-outline-warning">
+          <FontAwesomeIcon icon={faBook} size="lg" />
+          <span> Libros</span>
+        </button>
+        <button type="button" className="btn btn-outline-info"  onClick={handleGeneroButtonClick} >
+          <FontAwesomeIcon icon={faVenusMars} size="lg" />
+          <span> Genero</span>
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={handleAutorButtonClick} 
+        >
+          <FontAwesomeIcon icon={faPerson} size="lg" />
+          <span> Autores</span>
+        </button>
+      </div>
+    </nav>
+  );
+};
 
 export default Header;
