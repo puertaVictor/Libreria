@@ -58,6 +58,12 @@ public class LibroControlador {
 		return datos;
 	}
 	
+    @GetMapping("/obtenerLibroAleatorio")
+    public List<Object[]>libroAleatorio(){
+    	List<Object[]> datos = LibroService.libroAleatorio();
+    	return datos;
+    }
+	
     @PostMapping("/guardarLibro")
     public LibroEntity agregarLibro(@RequestBody LibroEntity libro) { 
         return LibroService.guardarLibro(libro);

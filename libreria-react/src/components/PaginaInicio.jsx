@@ -24,12 +24,11 @@ const PaginaInicio = () => {
     }
   
     return libroAleatorio.map((libroData, index) => {
-
       let imgPortada = null;
       if (libroData[3]) {
         imgPortada = `data:image/jpeg;base64, ${libroData[3]}`;
       }
-      let leido = libroData[4] ? (
+      let leido = libroData[1] ? (
         <FontAwesomeIcon
           icon={faThumbsUp}
           style={{ color: "#63E6BE" }}
@@ -63,6 +62,7 @@ const PaginaInicio = () => {
                     Autor: {libroData[6]}
                   </h6>
                   <p className="card-text">Genero: {libroData[5]}</p>
+                  <p className="card-text">Leido: {leido}</p>
                   <div>
                     <p style={{ color: "blue", fontWeight: "bold" }}>Descripción:</p>
                     <p className="card-text">{libroData[2]}</p>

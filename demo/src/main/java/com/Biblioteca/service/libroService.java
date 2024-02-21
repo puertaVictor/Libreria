@@ -42,6 +42,10 @@ public class libroService {
     public List<Object[]> ordenarPorFechaDes(){
     	return libroRepositorio.ordenarPorFechaDesc();
     }
+    
+    public List<Object[]> libroAleatorio(){
+    	return libroRepositorio.obtenerLibroAleatorio();
+    }
     public LibroEntity guardarLibro(LibroEntity libro) {
         return libroRepositorio.save(libro);
     }

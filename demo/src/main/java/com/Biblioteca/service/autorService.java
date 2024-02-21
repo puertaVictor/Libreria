@@ -25,7 +25,11 @@ public class autorService {
     	return autorRepositorio.buscarPorNombre(nombre);
     }
     
+    public List<Object[]> sacarNomrbes() {
+    	return autorRepositorio.ListaNombres();
+    }
     public AutorEntity guardarAutor(AutorEntity autor) {
     	return autorRepositorio.save(autor);
     }
+
 }

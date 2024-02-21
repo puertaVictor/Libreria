@@ -50,4 +50,16 @@ public interface LibroRepositorio extends JpaRepository<LibroEntity, Integer> {
 	        "INNER JOIN GenerosEntity g ON l.genero.idGenero = g.idGenero " +
 	        "ORDER BY l.fechaLectura DESC")
 	List<Object[]> ordenarPorFechaDesc();
+	
+	
+    @Query(value ="SELECT l.titulo, l.leido, l.descripcion, l.portada, l.fecha_lectura, g.nombre_genero, " +
+	        "(SELECT a.nombre FROM autor a WHERE a.idautor = l.idautor) AS nombreDelAutor " +
+	        "FROM libro l " +
+	        "INNER JOIN genero g ON l.idgenero = g.idgenero " +
+	        "WHERE l.leido = false "+
+            "ORDER BY RANDOM() " +
+            "LIMIT 1",nativeQuery = true)
+    List<Object[]> obtenerLibroAleatorio();
+	
+	
 }
