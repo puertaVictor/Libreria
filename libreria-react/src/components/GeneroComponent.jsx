@@ -3,30 +3,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 const GeneroComponent = ({ response }) => {
-  const itemsPerPage = 5; 
-  const [currentPage, setCurrentPage] = useState(1); 
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-
   const currentItems = response.slice(startIndex, endIndex);
 
- 
   const prevPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
-
   const nextPage = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(response.length / itemsPerPage)));
+    setCurrentPage((prev) =>
+      Math.min(prev + 1, Math.ceil(response.length / itemsPerPage))
+    );
   };
 
   return (
     <div>
       {response.length > 0 ? (
         <div>
-          <table className="table caption-top" style={{textAlign:"center"}}>
+          <table className="table caption-top" style={{ textAlign: "center" }}>
             <thead>
               <tr>
                 <th scope="col">Portada</th>
@@ -35,7 +34,7 @@ const GeneroComponent = ({ response }) => {
                 <th scope="col">Leído</th>
               </tr>
             </thead>
-            <tbody >
+            <tbody>
               {currentItems.map((item, index) => (
                 <tr key={index}>
                   <td>
@@ -55,8 +54,13 @@ const GeneroComponent = ({ response }) => {
                           height: "150px",
                           backgroundColor: "grey",
                           border: "solid 1px black",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
-                      ></div>
+                      >
+                        No disponible
+                      </div>
                     )}
                   </td>
                   <td>{item[1]}</td>
@@ -81,10 +85,20 @@ const GeneroComponent = ({ response }) => {
             </tbody>
           </table>
           <div style={{ textAlign: "center" }}>
-            <button class="btn btn-outline-warning" onClick={prevPage} disabled={currentPage === 1}>
+            <button
+              className="btn btn-outline-warning"
+              onClick={prevPage}
+              disabled={currentPage === 1}
+            >
               Anterior
             </button>
-            <button class="btn btn-outline-success" onClick={nextPage} disabled={currentPage === Math.ceil(response.length / itemsPerPage)}>
+            <button
+              className="btn btn-outline-success"
+              onClick={nextPage}
+              disabled={
+                currentPage === Math.ceil(response.length / itemsPerPage)
+              }
+            >
               Siguiente
             </button>
           </div>
@@ -99,7 +113,8 @@ const GeneroComponent = ({ response }) => {
               marginTop: "80px",
               color: "red",
               fontWeight: "bold",
-            }}>
+            }}
+          >
             Nombre del género incorrecto.
           </h3>
         </div>
