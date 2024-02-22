@@ -65,7 +65,7 @@ const AutorBotones = () => {
     }
 
     return (
-        <div>
+        <div> 
             <div className="mt-5 list-group">
                 {listaAutores.map((autorData, index) => (
                     <div key={index}>
@@ -77,7 +77,7 @@ const AutorBotones = () => {
                                 <li className='list-group-item list-group-item-action' key={libroIndex}>
                                     <p>Título: {libro.titulo}</p>
                                     <p>Descripción: {libro.descripcion}</p>
-                                    <p>Leído: {libro.leido}</p> {/* Agregar el estado leido */}
+                                    <p>Leído: {libro.leido}</p> 
                                 </li>
                             ))}
                         </ul>
@@ -89,3 +89,6 @@ const AutorBotones = () => {
 };
 
 export default AutorBotones;
+
+
+
