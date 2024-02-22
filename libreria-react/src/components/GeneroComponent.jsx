@@ -26,7 +26,7 @@ const GeneroComponent = ({ response }) => {
     <div>
       {response.length > 0 ? (
         <div>
-          <table className="table caption-top">
+          <table className="table caption-top" style={{textAlign:"center"}}>
             <thead>
               <tr>
                 <th scope="col">Portada</th>
@@ -35,7 +35,7 @@ const GeneroComponent = ({ response }) => {
                 <th scope="col">Leído</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {currentItems.map((item, index) => (
                 <tr key={index}>
                   <td>
@@ -46,7 +46,6 @@ const GeneroComponent = ({ response }) => {
                         style={{
                           width: "100px",
                           height: "150px",
-                          marginLeft: "50px",
                         }}
                       />
                     ) : (
@@ -56,7 +55,6 @@ const GeneroComponent = ({ response }) => {
                           height: "150px",
                           backgroundColor: "grey",
                           border: "solid 1px black",
-                          marginLeft: "50px",
                         }}
                       ></div>
                     )}
