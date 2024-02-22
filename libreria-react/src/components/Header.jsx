@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BuscarPorNombre } from "../service/autor_service";
+import {BuscarPorGenero} from "../service/genero_service";
 import "../css/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -54,7 +55,7 @@ const Header = ({ onSearchSuccess }) => {
         break;
       case "Generos":
         try {
-          response = await BuscarPorNombre(dato);
+          response = await BuscarPorGenero(dato);
           setSearchResults(response);
           onSearchSuccess(response);
           navigate("/generoComponent");
@@ -108,7 +109,9 @@ const Header = ({ onSearchSuccess }) => {
           <FontAwesomeIcon icon={faBook} size="lg" />
           <span> Libros</span>
         </button>
-        <button type="button" className="btn btn-outline-info"  onClick={handleGeneroButtonClick} >
+        <button type="button" 
+        className="btn btn-outline-info"  
+        onClick={handleGeneroButtonClick} >
           <FontAwesomeIcon icon={faVenusMars} size="lg" />
           <span> Genero</span>
         </button>

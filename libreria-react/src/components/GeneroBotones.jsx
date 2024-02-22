@@ -48,7 +48,7 @@ const GeneroBotones = () => {
             <tbody>
               <tr>
                 {listaGeneros.map((genero, index) => (
-                  <td key={index} style={{ padding: "10px" }}>{genero.toUpperCase()}</td>
+                  <td key={index} style={{ padding: "10px" }}>{genero}</td>
                 ))}
               </tr>
             </tbody>
