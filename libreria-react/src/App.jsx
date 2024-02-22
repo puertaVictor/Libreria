@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import AutorComponent from "./components/AutorComponent.jsx";
 import GeneroComponent from "./components/GeneroComponent.jsx";
 import AutorBotones from "./components/AutorBotones";
-
+import LibroComponent from "./components/LibroComponent.jsx";
 import PaginaInicio from "./components/PaginaInicio";
 import GeneroBotones from "./components/GeneroBotones.jsx";
 
@@ -32,13 +32,22 @@ const App = () => {
             path="/autorComponent"
             element={<AutorComponent response={response} />}
           />
-           <Route
+          <Route
             path="/generoComponent"
             element={<GeneroComponent response={response} />}
           />
-          <Route path="/autores" element={<AutorBotones />} />
-          <Route path="/generos" element={<GeneroBotones />} />
-          {/* Otros Routes aquí */}
+          <Route
+            path="/autores"
+            element={<AutorBotones onSearchSuccess={handleSearchSuccess} />}
+          />
+          <Route
+            path="/generos"
+            element={<GeneroBotones />}
+          />
+          <Route
+            path="/libros"
+            element={<LibroComponent response={response} />}
+          />
         </Routes>
       </div>
     </Router>

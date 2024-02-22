@@ -5,6 +5,7 @@ import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import "../css/Inicio.css"; 
 const PaginaInicio = () => {
   const [libroAleatorio, setLibroAleatorio] = useState(null);
+  
   useEffect(() => {
     const fetchLibroAleatorio = async () => {
       try {
