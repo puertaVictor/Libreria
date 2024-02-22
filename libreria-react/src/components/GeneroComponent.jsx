@@ -101,8 +101,7 @@ const GeneroComponent = ({ response }) => {
               marginTop: "80px",
               color: "red",
               fontWeight: "bold",
-            }}
-          >
+            }}>
             Nombre del género incorrecto.
           </h3>
         </div>
