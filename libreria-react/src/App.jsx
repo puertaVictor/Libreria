@@ -1,4 +1,3 @@
-// En App.js
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
@@ -44,9 +43,10 @@ const App = () => {
             path="/generos"
             element={<GeneroBotones />}
           />
+          {/* Aquí pasamos los datos del libro al componente LibroComponent */}
           <Route
             path="/libros"
-            element={<LibroComponent response={response} />}
+            element={<LibroComponent />}
           />
         </Routes>
       </div>

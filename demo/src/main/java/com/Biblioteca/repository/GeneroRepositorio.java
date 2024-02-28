@@ -15,8 +15,9 @@ public interface GeneroRepositorio extends JpaRepository<GenerosEntity, Integer>
 	
 	
 	
-	@Query("SELECT l.titulo, l.autor.nombre, l.descripcion, l.portada, l.leido FROM LibroEntity l JOIN l.genero g WHERE g.nombreGenero = :genero")
+	@Query("SELECT l.titulo, l.autor.nombre, l.descripcion, l.portada, l.leido FROM LibroEntity l JOIN l.genero g WHERE g.nombreGenero = :genero ORDER BY l.autor.nombre")
 	List<Object[]> librosPorGeneros(@Param("genero") String genero);
+
 
 
 

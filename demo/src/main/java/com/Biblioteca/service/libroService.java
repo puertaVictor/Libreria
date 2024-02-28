@@ -49,6 +49,9 @@ public class libroService {
     public LibroEntity guardarLibro(LibroEntity libro) {
         return libroRepositorio.save(libro);
     }
+    public List<Object[]> buscarPorDescripcion(String cadena){
+    	return libroRepositorio.buscarPorDescripcion(cadena);
+    }
     @Transactional
     public void actualizarLibro(int idLibro, String titulo, String descripcion, Boolean leido, Date fechaLectura,byte[] portada) {
         LibroEntity libro = libroRepositorio.findById(idLibro).orElseThrow(() -> new NoSuchElementException("Libro no encontrado"));

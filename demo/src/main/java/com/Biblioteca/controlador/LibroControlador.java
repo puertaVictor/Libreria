@@ -64,6 +64,12 @@ public class LibroControlador {
     	return datos;
     }
 	
+	@GetMapping("/buscarPorCadena")
+	public List<Object[]> buscarPorDescripcion(@RequestParam("cadena") String cadena){
+		List<Object[]> datos = LibroService.buscarPorDescripcion(cadena);
+		return datos;
+	}
+	
     @PostMapping("/guardarLibro")
     public LibroEntity agregarLibro(@RequestBody LibroEntity libro) { 
         return LibroService.guardarLibro(libro);

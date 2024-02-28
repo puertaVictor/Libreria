@@ -51,6 +51,13 @@ public interface LibroRepositorio extends JpaRepository<LibroEntity, Integer> {
 	        "ORDER BY l.fechaLectura DESC")
 	List<Object[]> ordenarPorFechaDesc();
 	
+	@Query("SELECT l.titulo, l.leido, l.descripcion, l.portada, l.fechaLectura, g.nombreGenero, " +
+	        "(SELECT a.nombre FROM AutorEntity a WHERE a.idAutor = l.autor.idAutor) AS nombreDelAutor " +
+	        "FROM LibroEntity l " +
+	        "INNER JOIN GenerosEntity g ON l.genero.idGenero = g.idGenero " +
+	        "where l.descripcion like %:cadena%")
+	List<Object[]> buscarPorDescripcion(@Param("cadena") String cadena);
+
 	
     @Query(value ="SELECT l.titulo, l.leido, l.descripcion, l.portada, l.fecha_lectura, g.nombre_genero, " +
 	        "(SELECT a.nombre FROM autor a WHERE a.idautor = l.idautor) AS nombreDelAutor " +

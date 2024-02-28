@@ -9,6 +9,7 @@ import {
   faVenusMars,
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
+import { BuscarPorTituloService } from '../service/libro_service'; 
 
 const Header = ({ onSearchSuccess }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -45,10 +46,10 @@ const Header = ({ onSearchSuccess }) => {
         break;
       case "Libros":
         try {
-          response = await BuscarPorNombre(dato);
+          response = await BuscarPorTituloService(dato);
           setSearchResults(response);
           onSearchSuccess(response);
-          navigate("/libroComponent");
+          navigate("/libros");
         } catch (error) {
           console.error("Error buscando libro por título:", error);
         }
