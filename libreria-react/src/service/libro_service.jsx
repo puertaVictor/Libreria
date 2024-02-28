@@ -74,6 +74,16 @@ const BuscarLeidos = async () => {
     }
   };
 
+  const buscarPorPalabraDescripcion = async (cadena) => {
+    try {
+      const response = await axios.get(`${baseURL}/buscarPorCadena?cadena=${cadena}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error buscando libro por título:', error);
+      throw error;
+    }
+  };
+
 //   POST MAPPINGS
 
 
@@ -105,4 +115,4 @@ const GuardarLibroService = async (libro) => {
     }
   };
 
-export { BuscarPorTituloService , BuscarLeidos , BuscarNoLeidos, SacarPortadas , OrdenarFechaDescendente , OrdenarFechaAscendente , ActualizarLibroService , GuardarLibroService , LibroAleatorio  };
+export { BuscarPorTituloService , BuscarLeidos , BuscarNoLeidos, SacarPortadas , OrdenarFechaDescendente , OrdenarFechaAscendente , ActualizarLibroService , GuardarLibroService , LibroAleatorio , buscarPorPalabraDescripcion };

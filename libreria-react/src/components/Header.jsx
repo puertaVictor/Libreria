@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BuscarPorNombre } from "../service/autor_service";
 import {BuscarPorGenero} from "../service/genero_service";
+import {BuscarPorTituloService , buscarPorPalabraDescripcion} from '../service/libro_service'; 
 import "../css/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,7 +10,7 @@ import {
   faVenusMars,
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
-import { BuscarPorTituloService } from '../service/libro_service'; 
+
 
 const Header = ({ onSearchSuccess }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -24,6 +25,9 @@ const Header = ({ onSearchSuccess }) => {
     navigate("/generos");
   };
 
+  const handleLibroButtonClick = () => {
+    navigate("/libros");
+  };
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -49,7 +53,7 @@ const Header = ({ onSearchSuccess }) => {
           response = await BuscarPorTituloService(dato);
           setSearchResults(response);
           onSearchSuccess(response);
-          navigate("/libros");
+          navigate("/librosComponent");
         } catch (error) {
           console.error("Error buscando libro por título:", error);
         }
@@ -64,6 +68,15 @@ const Header = ({ onSearchSuccess }) => {
           console.error("Error buscando género por nombre:", error);
         }
         break;
+      case "Descripcion":
+        try{
+          response = await buscarPorPalabraDescripcion(dato);
+          setSearchResults(response);
+          onSearchSuccess(response);
+          navigate("/descripcionComponent");
+        } catch(error) {
+          console.error("Error buscando género por nombre:", error);
+        }
       default:
         break;
     }
@@ -85,6 +98,7 @@ const Header = ({ onSearchSuccess }) => {
             <option value="Autores">Autores</option>
             <option value="Libros">Libros</option>
             <option value="Generos">Géneros</option>
+            <option value="Descripcion">Buscar por palabras</option>
           </select>
         </div>
         <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
@@ -106,7 +120,10 @@ const Header = ({ onSearchSuccess }) => {
       </div>
 
       <div id="botones">
-        <button type="button" className="btn btn-outline-warning">
+        <button 
+        type="button" 
+        className="btn btn-outline-warning"
+        onClick={handleLibroButtonClick}>
           <FontAwesomeIcon icon={faBook} size="lg" />
           <span> Libros</span>
         </button>
@@ -119,8 +136,7 @@ const Header = ({ onSearchSuccess }) => {
         <button
           type="button"
           className="btn btn-outline-danger"
-          onClick={handleAutorButtonClick} 
-        >
+          onClick={handleAutorButtonClick}>
           <FontAwesomeIcon icon={faPerson} size="lg" />
           <span> Autores</span>
         </button>

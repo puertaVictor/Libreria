@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import AutorComponent from "./components/AutorComponent.jsx";
 import GeneroComponent from "./components/GeneroComponent.jsx";
+import DescripcionComponent from "./components/DescripcionComponent.jsx";
 import AutorBotones from "./components/AutorBotones";
+import LibroBotones from "./components/LibroBotones";
 import LibroComponent from "./components/LibroComponent.jsx";
 import PaginaInicio from "./components/PaginaInicio";
 import GeneroBotones from "./components/GeneroBotones.jsx";
@@ -35,18 +37,25 @@ const App = () => {
             path="/generoComponent"
             element={<GeneroComponent response={response} />}
           />
+         <Route
+            path="/librosComponent"
+            element={<LibroComponent response={response}/>}
+          />
+        <Route
+            path="/descripcionComponent"
+            element={<DescripcionComponent response={response}/>}
+          />
           <Route
             path="/autores"
-            element={<AutorBotones onSearchSuccess={handleSearchSuccess} />}
+            element={<AutorBotones />}
           />
           <Route
             path="/generos"
             element={<GeneroBotones />}
           />
-          {/* Aquí pasamos los datos del libro al componente LibroComponent */}
           <Route
             path="/libros"
-            element={<LibroComponent />}
+            element={<LibroBotones />}
           />
         </Routes>
       </div>
