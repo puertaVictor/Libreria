@@ -34,6 +34,17 @@ const ListarAutores = async () =>{
     throw error;
   }
 }
+
+const nombresAutor = async () =>{
+  try {
+    const response = await axios.get(`${baseURL}/nombresAutores`);
+    return response.data;
+  } catch (error) {
+    console.error('Error sacando a los autores:', error);
+    throw error;
+  }
+}
+
 // GETS MAPPINGS Autores
 
 const GuardarAutor = async (nombre) => {
@@ -45,4 +56,4 @@ const GuardarAutor = async (nombre) => {
       throw error;
     }
   };
-export { VerAutores , BuscarPorNombre ,  GuardarAutor , ListarAutores };
+export { VerAutores , BuscarPorNombre ,  GuardarAutor , ListarAutores , nombresAutor};

@@ -25,6 +25,10 @@ public class autorService {
     	return autorRepositorio.buscarPorNombre(nombre);
     }
     
+    public List<Object[]> conseguirNombres(){
+    	return autorRepositorio.nombresAutor();
+    }
+    
     public List<Object[]> sacarNomrbes() {
     	return autorRepositorio.ListaNombres();
     }

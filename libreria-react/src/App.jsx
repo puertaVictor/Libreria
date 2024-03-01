@@ -9,6 +9,10 @@ import LibroBotones from "./components/LibroBotones";
 import LibroComponent from "./components/LibroComponent.jsx";
 import PaginaInicio from "./components/PaginaInicio";
 import GeneroBotones from "./components/GeneroBotones.jsx";
+import FormularioAutor from "./components/FormularioAutor.jsx";
+import FormularioGenero from "./components/FormularioGenero.jsx";
+import FormularioLibro from "./components/FormularioLibro.jsx";
+
 
 const App = () => {
   const [response, setResponse] = useState("");
@@ -43,8 +47,11 @@ const App = () => {
           />
         <Route
             path="/descripcionComponent"
-            element={<DescripcionComponent response={response}/>}
+            element={<DescripcionComponent 
+            response={response} 
+            onSearchSuccess={handleSearchSuccess} />}
           />
+
           <Route
             path="/autores"
             element={<AutorBotones />}
@@ -56,6 +63,18 @@ const App = () => {
           <Route
             path="/libros"
             element={<LibroBotones />}
+          />
+          <Route 
+            path="/formAutor" 
+            element={<FormularioAutor />} 
+          />
+          <Route 
+            path="/formGenero" 
+            element={<FormularioGenero />} 
+          />
+          <Route 
+            path="/formLibro" 
+            element={<FormularioLibro />} 
           />
         </Routes>
       </div>

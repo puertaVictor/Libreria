@@ -42,6 +42,12 @@ public class AutorControlador {
 		return datos;
 	}
 	
+	@GetMapping("/nombresAutores")
+	public List<Object[]> nombresAutor(){
+		List<Object[]> datos = servicioAutor.conseguirNombres();
+		return datos;
+	}
+	
 	@PostMapping("/guardarAutor")
 	public AutorEntity agregarAutor(AutorEntity autor) {
 		return servicioAutor.guardarAutor(autor);

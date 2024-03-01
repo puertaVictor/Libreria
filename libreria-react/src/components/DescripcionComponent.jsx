@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
+import { BuscarPorTituloService } from '../service/libro_service'; 
 
 const DescripcionComponent = ({ response }) => {
+    console.log(response)
+    const navigate = useNavigate();
+    const [busqLibro, setBusqLibro] = useState(null);
+    const searchLibro = async (nombre) => {
+        try {
+            let response = await BuscarPorTituloService(nombre);
+            setBusqLibro(response);
+            navigate("/librosComponent"); 
+        } catch (error) {
+            console.error("Error al sacar el libro:", error);
+        }
+    }
+
     const renderDescripcion = () => {
         return response.map((libDescripcion, index) => {
             let titulo = libDescripcion[0];
-            let leido = libDescripcion[1] ? (
+            let leido = libDescripcion[4] ? (
                 <FontAwesomeIcon
                     icon={faThumbsUp}
                     style={{ color: "#63E6BE" }}
@@ -21,15 +36,15 @@ const DescripcionComponent = ({ response }) => {
             );
             let resumen = libDescripcion[2];
             let img = null;
-            if (libDescripcion[3]) {
-                img = `data:image/jpeg;base64, ${libDescripcion[3]}`;
+            if (libDescripcion[6]) {
+                img = `data:image/jpeg;base64, ${libDescripcion[6]}`;
             }
             let fecha = null;
-            if (libDescripcion[4] != null) {
-                fecha = new Date(libDescripcion[4]).toLocaleDateString();
+            if (libDescripcion[5] != null) {
+                fecha = new Date(libDescripcion[5]).toLocaleDateString();
             }
-            let genero = libDescripcion[5];
-            let autor = libDescripcion[6];
+            let genero = libDescripcion[3];
+            let autor = libDescripcion[1];
 
             return (
                 <div className="card" style={{ width: "18rem" }} key={index}>
@@ -45,7 +60,10 @@ const DescripcionComponent = ({ response }) => {
                         <li className="list-group-item">Leido: {leido}</li>
                     </ul>
                     <div className="card-body">
-                        <a href="#" className="card-link">Ver más</a>
+                        <a href="#" 
+                        className="card-link"
+                        onClick={() => searchLibro(titulo)}
+                        >Ver Libro</a>
                     </div>
                 </div>
             );

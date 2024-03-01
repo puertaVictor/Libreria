@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.Biblioteca.model.LibroEntity;
 import com.Biblioteca.service.libroService;
@@ -71,8 +73,20 @@ public class LibroControlador {
 	}
 	
     @PostMapping("/guardarLibro")
-    public LibroEntity agregarLibro(@RequestBody LibroEntity libro) { 
-        return LibroService.guardarLibro(libro);
+    public ResponseEntity<?> agregarLibro(@RequestBody String jsonLibro) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+        	System.out.println(jsonLibro);
+
+        	// Convertir el JSON en un objeto LibroEntity
+            LibroEntity libro = objectMapper.readValue(jsonLibro, LibroEntity.class);
+            // Llamar al servicio para guardar el libro
+            LibroService.guardarLibro(libro);
+            return ResponseEntity.ok("Libro guardado correctamente");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el libro");
+        }
     }
     
     @PostMapping("/actualizarLibro/{idLibro}")

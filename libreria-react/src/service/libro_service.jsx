@@ -84,12 +84,22 @@ const BuscarLeidos = async () => {
     }
   };
 
+  // const sacarUltimoId = async () => {
+  //   try {
+  //     const response = await axios.get(`${baseURL}/obtenerIdAutor`);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Error al obtener el id:', error);
+  //     throw error;
+  //   }
+  // };
+
 //   POST MAPPINGS
 
 
 const GuardarLibroService = async (libro) => {
     try {
-      const response = await axios.post(`${baseURL}/guardarLibro`, libro);
+      const response = await axios.post(`${baseURL}/guardarLibro`,libro);
       return response.data;
     } catch (error) {
       console.error('Error al guardar el libro:', error);

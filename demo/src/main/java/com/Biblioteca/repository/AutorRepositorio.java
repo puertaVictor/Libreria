@@ -25,5 +25,9 @@ public interface AutorRepositorio extends JpaRepository<AutorEntity, Integer> {
     	       "JOIN LibroEntity l ON a.idAutor = l.autor.idAutor " +
     	       "ORDER BY a.nombre")
     	List<Object[]> ListaNombres();
+    	
+    @Query("SELECT a.nombre FROM AutorEntity a")
+    	List<Object[]> nombresAutor();
+
 
 }

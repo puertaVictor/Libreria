@@ -6,7 +6,7 @@ import "../css/LibroComponent.css";
 
 const LibroComponent = ({ response }) => {
   const [listaGeneros, setListaGeneros] = useState([]);
-
+  console.log(response)
   useEffect(() => {
     const fetchListaGeneros = async () => {
       try {
@@ -21,11 +21,6 @@ const LibroComponent = ({ response }) => {
   }, []);
 
 
-
-  const closeModal = () => {
-    console.log("Cerrando modal...");
-    setShowModal(false);
-  };
 
   return (
     <div className="container">
