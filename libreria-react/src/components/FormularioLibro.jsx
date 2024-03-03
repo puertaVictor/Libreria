@@ -87,7 +87,7 @@ const FormularioLibro = () => {
 
   return (
     <div className="container">
-      <h2>Formulario de Libro</h2>
+      <h2>Insertar Libro</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="titulo" className="form-label">Título:</label>
@@ -103,7 +103,7 @@ const FormularioLibro = () => {
           <label htmlFor="autor" className="form-label">Autor:</label>
           <select
             className="form-select"
-            id="autor"
+            id="idautor"
             value={autor || ''}
             onChange={handleAutorChange}
           >
@@ -165,7 +165,7 @@ const FormularioLibro = () => {
             onChange={handleFileChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Guardar Libro</button>
+        <button type="submit" id="btnEnter" className="btn btn-primary">Guardar Libro</button>
       </form>
     </div>
   );
