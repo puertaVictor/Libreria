@@ -28,13 +28,14 @@ const BuscarPorGenero = async (nombre) => {
 
 // GETS MAPPINGS Generos
 
-const GuardarGenero = async (nombre) => {
+const GuardarGenero = async (generoData) => {
     try {
-      const response = await axios.post(`${baseURL}/guardarGenero`, { nombre });
+      const response = await axios.post(`${baseURL}/guardarGenero`,generoData );
       return response.data;
     } catch (error) {
       console.error('Error al guardar el autor:', error);
       throw error;
     }
   };
+
 export { VerGeneros , BuscarPorGenero ,  GuardarGenero };
