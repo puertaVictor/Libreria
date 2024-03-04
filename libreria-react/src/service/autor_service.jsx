@@ -47,9 +47,9 @@ const nombresAutor = async () =>{
 
 // GETS MAPPINGS Autores
 
-const GuardarAutor = async (nombre) => {
+const GuardarAutor = async (autorData) => {
     try {
-      const response = await axios.post(`${baseURL}/guardarAutor`, { nombre });
+      const response = await axios.post(`${baseURL}/guardarAutor`,autorData);
       return response.data;
     } catch (error) {
       console.error('Error al guardar el autor:', error);
