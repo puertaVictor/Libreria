@@ -51,7 +51,25 @@ class DemoApplicationTests {
         
         driver.findElement(By.id("btnEnter")).click();
     }
+    
+    @Test
+    void pruebaAddGenero() {
+        WebDriver driver = new EdgeDriver();
+        
+        driver.get("http://localhost:5173/formGenero");
+        driver.findElement(By.id("nombreGenero")).sendKeys("Discursos");
+        driver.findElement(By.id("btnEnter")).click();       
+    }
 
+    @Test
+    void pruebaAddAutor() {
+        WebDriver driver = new EdgeDriver();
+        
+        driver.get("http://localhost:5173/formAutor");
+        driver.findElement(By.id("autor")).sendKeys("Pepe Mel");
+        driver.findElement(By.id("nacionalidad")).sendKeys("Austriaco");
+        driver.findElement(By.id("btnEnter")).click();       
+    }
 
     
  

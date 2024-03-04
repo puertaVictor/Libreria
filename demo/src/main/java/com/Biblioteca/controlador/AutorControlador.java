@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Biblioteca.model.AutorEntity;
 import com.Biblioteca.service.autorService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/Autor")
@@ -48,8 +50,10 @@ public class AutorControlador {
 		return datos;
 	}
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@PostMapping("/guardarAutor")
-	public AutorEntity agregarAutor(AutorEntity autor) {
+	public AutorEntity agregarAutor(@RequestBody AutorEntity autor) {
+		System.out.println(autor);
 		return servicioAutor.guardarAutor(autor);
 	}
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Biblioteca.model.GenerosEntity;
 import com.Biblioteca.service.generoService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/Genero")
@@ -32,9 +33,10 @@ public class generoControlador {
 		List<Object[]> datos = generoService.obtenerDatosPorGenero(genero);
 		return datos;
 	}
-	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@PostMapping("/guardarGenero")
 	public GenerosEntity agregarGenero(@RequestBody GenerosEntity genero) {
+		System.out.println(genero);
 		return generoService.guardarGenero(genero);
 	}
 	

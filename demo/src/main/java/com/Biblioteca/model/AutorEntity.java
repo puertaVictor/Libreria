@@ -12,8 +12,10 @@ public class AutorEntity {
     private int idAutor;
 
     private String nombre;
-
-
+    
+    @Column(name = "nacionalidad")
+    private String nacionalidad; 
+    
 	public int getIdAutor() {
 		return idAutor;
 	}
@@ -28,6 +30,19 @@ public class AutorEntity {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+
+	@Override
+	public String toString() {
+		return "AutorEntity [idAutor=" + idAutor + ", nombre=" + nombre + ", nacionalidad=" + nacionalidad + "]";
 	}
 
 

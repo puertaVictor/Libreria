@@ -10,6 +10,8 @@ public class GenerosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idgenero")
     private int idGenero;
+    
+    @JoinColumn(name = "nombre_genero")
     private String nombreGenero;
 
 	public int getIdGenero() {
@@ -28,5 +30,11 @@ public class GenerosEntity {
 		this.nombreGenero = nombreGenero;
 	}
 
-    
+	  @Override
+	    public String toString() {
+	        return "GenerosEntity{" +
+	                "idGenero=" + idGenero +
+	                ", nombreGenero='" + nombreGenero + '\'' +
+	                '}';
+	    }
 }
