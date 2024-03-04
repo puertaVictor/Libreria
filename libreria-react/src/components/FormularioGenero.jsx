@@ -39,7 +39,6 @@ const FormularioGenero = () => {
       await GuardarGenero(generoData);
       setGenero("");
       setError("");
-      // Actualizar la lista de géneros después de guardar uno nuevo
       setGenerosGuardados([...generosGuardados, genero.trim().toLowerCase()]);
     } catch (error) {
       console.error("Error al guardar el género:", error);

@@ -84,15 +84,15 @@ const BuscarLeidos = async () => {
     }
   };
 
-  // const sacarUltimoId = async () => {
-  //   try {
-  //     const response = await axios.get(`${baseURL}/obtenerIdAutor`);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error('Error al obtener el id:', error);
-  //     throw error;
-  //   }
-  // };
+  const obtenerID = async (titulo) => {
+    try {
+      const response = await axios.get(`${baseURL}/obtenerID?titulo=${titulo}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener el id:', error);
+      throw error;
+    }
+  };
 
 //   POST MAPPINGS
 
@@ -107,16 +107,16 @@ const GuardarLibroService = async (libro) => {
     }
   };
   
-  const ActualizarLibroService = async (idLibro, { titulo, descripcion, leido, fechaLectura, portada }) => {
+  const ActualizarLibro = async (idLibro, { titulo, autor, descripcion, genero,leido, fechaLectura, portada }) => {
     try {
-      const response = await axios.post(`${baseURL}/actualizarLibro/${idLibro}`, null, {
-        params: {
-          titulo,
-          descripcion,
-          leido,
-          fechaLectura,
-          portada,
-        },
+      const response = await axios.put(`${baseURL}/actualizarLibro/${idLibro}`, {
+        titulo,
+        autor,
+        descripcion,
+        genero, 
+        leido,
+        fechaLectura,
+        portada,
       });
       return response.data;
     } catch (error) {
@@ -124,5 +124,6 @@ const GuardarLibroService = async (libro) => {
       throw error;
     }
   };
+  
 
-export { BuscarPorTituloService , BuscarLeidos , BuscarNoLeidos, SacarPortadas , OrdenarFechaDescendente , OrdenarFechaAscendente , ActualizarLibroService , GuardarLibroService , LibroAleatorio , buscarPorPalabraDescripcion };
+export { BuscarPorTituloService , BuscarLeidos , BuscarNoLeidos, SacarPortadas , OrdenarFechaDescendente , OrdenarFechaAscendente , ActualizarLibro , GuardarLibroService , LibroAleatorio , buscarPorPalabraDescripcion , obtenerID};

@@ -58,6 +58,8 @@ public interface LibroRepositorio extends JpaRepository<LibroEntity, Integer> {
 	        "where l.descripcion like %:cadena%")
 	List<Object[]> buscarPorDescripcion(@Param("cadena") String cadena);
 
+	@Query(value="SELECT l.idlibro FROM libro l WHERE l.titulo = :titulo", nativeQuery = true)
+	Integer obtenerID(@Param("titulo") String titulo);
 	
     @Query(value ="SELECT l.titulo, l.leido, l.descripcion, l.portada, l.fecha_lectura, g.nombre_genero, " +
 	        "(SELECT a.nombre FROM autor a WHERE a.idautor = l.idautor) AS nombreDelAutor " +

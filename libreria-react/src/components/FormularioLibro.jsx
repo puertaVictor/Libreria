@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GuardarLibroService } from "../service/libro_service";
+import { GuardarLibroService , ActualizarLibro, obtenerID  } from "../service/libro_service";
 import { VerGeneros } from "../service/genero_service";
 import { nombresAutor } from "../service/autor_service";
 
@@ -13,6 +13,7 @@ const FormularioLibro = () => {
   const [portada, setPortada] = useState(null);
   const [autores, setAutores] = useState([]);
   const [generos, setGeneros] = useState([]);
+  const [idEdit, setIdEdit] = useState(null); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,6 +83,46 @@ const FormularioLibro = () => {
   const handleGeneroChange = (event) => {
     const { value } = event.target;
     setGenero(parseInt(value));
+  };
+  
+  const handleEditarClick = async (event) => {
+    event.preventDefault();
+    try {
+      const libro = {
+        titulo,
+        autor: { idAutor: autor }, 
+        descripcion,
+        genero: { idGenero: genero },
+        leido,
+        fechaLectura,
+        portada
+      };
+      const idDelLibro = await obtenerID(libro.titulo);
+
+      if (idDelLibro !== null) {
+        const libroActualizado = {};
+        if (libro.titulo) libroActualizado.titulo = libro.titulo;
+        if (libro.autor) libroActualizado.autor = libro.autor;
+        if (libro.descripcion) libroActualizado.descripcion = libro.descripcion;
+        if (libro.genero) libroActualizado.genero = libro.genero;
+        if (libro.leido) libroActualizado.leido = libro.leido;
+        if (libro.fechaLectura) libroActualizado.fechaLectura = libro.fechaLectura;
+        if (libro.portada) libroActualizado.portada = libro.portada;
+        await ActualizarLibro(idDelLibro, libroActualizado);
+        console.log(libroActualizado)
+        setTitulo("");
+        setAutor(null);
+        setDescripcion("");
+        setGenero(null);
+        setLeido(false);
+        setFechaLectura(new Date().toISOString().slice(0, 10));
+        setPortada(null);
+      } else {
+        console.log("El título del libro no se encontró en la base de datos.");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
   
 
@@ -166,7 +207,14 @@ const FormularioLibro = () => {
           />
         </div>
         <button type="submit" id="btnEnter" className="btn btn-primary">Guardar Libro</button>
-      </form>
+        <button
+            type="button"
+            id="btnEditLib"
+            className="btn btn-primary ms-2"
+            onClick={handleEditarClick}
+          >
+            Editar Libro
+          </button>      </form>
     </div>
   );
 };

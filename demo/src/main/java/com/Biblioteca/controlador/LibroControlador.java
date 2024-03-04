@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +74,12 @@ public class LibroControlador {
 		return datos;
 	}
 	
+	@GetMapping("/obtenerID")
+	public int obtenerID(@RequestParam("titulo")String titulo) {
+		int id = LibroService.obtenerID(titulo);
+        return id;
+	}
+	
 	@JsonIgnoreProperties(ignoreUnknown = true)
     @PostMapping("/guardarLibro")
     public ResponseEntity<?> agregarLibro(@RequestBody String jsonLibro) {
@@ -88,14 +95,18 @@ public class LibroControlador {
         }
     }
     
-    @PostMapping("/actualizarLibro/{idLibro}")
-    public ResponseEntity<String> actualizarLibro(@PathVariable int idLibro,
-                                                 @RequestParam(required = false) String titulo,
-                                                 @RequestParam(required = false) String descripcion,
-                                                 @RequestParam(required = false) Boolean leido,
-    											 @RequestParam(required = false) Date fechaLectura,
-    											 @RequestParam(required = false) byte[] portada){
-    	LibroService.actualizarLibro(idLibro, titulo, descripcion, leido,fechaLectura,portada);
-        return ResponseEntity.ok("Libro actualizado exitosamente");
-    }
+	@PutMapping("/actualizarLibro/{idLibro}")
+	public ResponseEntity<String> actualizarLibro(@PathVariable int idLibro, @RequestBody LibroEntity libro){
+
+	    libro.setIdLibro(idLibro);
+
+	    LibroService.actualizarLibro(libro);
+	    return ResponseEntity.ok("Libro actualizado exitosamente");
+	}
+
+
+
+
+
+
 }

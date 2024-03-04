@@ -11,7 +11,7 @@ public class LibroEntity {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idLibro")
+    @Column(name = "idlibro")
     private int idLibro;
 
     private String titulo;
@@ -28,6 +28,13 @@ public class LibroEntity {
 
     private boolean leido;
 
+	public GenerosEntity getGenero() {
+		return genero;
+	}
+	
+	public AutorEntity getAutor() {
+		return autor;
+	}
     @Temporal(TemporalType.DATE)
     private Date fechaLectura;
 
@@ -50,9 +57,6 @@ public class LibroEntity {
 		this.titulo = titulo;
 	}
 
-	public AutorEntity getAutor() {
-		return autor;
-	}
 
 	public void setAutor(AutorEntity autor) {
 		this.autor = autor;
@@ -64,10 +68,6 @@ public class LibroEntity {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public GenerosEntity getGenero() {
-		return genero;
 	}
 
 	public void setGenero(GenerosEntity genero) {
@@ -96,6 +96,13 @@ public class LibroEntity {
 
 	public void setPortada(byte[] portada) {
 		this.portada = portada;
+	}
+
+	@Override
+	public String toString() {
+		return "LibroEntity [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", descripcion="
+				+ descripcion + ", genero=" + genero + ", leido=" + leido + ", fechaLectura=" + fechaLectura
+				+ ", portada=" + Arrays.toString(portada) + "]";
 	}
 
 
