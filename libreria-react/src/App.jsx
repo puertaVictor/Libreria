@@ -6,6 +6,8 @@ import GeneroComponent from "./components/GeneroComponent.jsx";
 import DescripcionComponent from "./components/DescripcionComponent.jsx";
 import AutorBotones from "./components/AutorBotones";
 import LibroBotones from "./components/LibroBotones";
+import NacionalidadBotones from "./components/NacionalidadBotones.jsx"
+import NacionalidadComponente from "./components/NacionalidadComponente.jsx";
 import LibroComponent from "./components/LibroComponent.jsx";
 import PaginaInicio from "./components/PaginaInicio";
 import GeneroBotones from "./components/GeneroBotones.jsx";
@@ -45,13 +47,16 @@ const App = () => {
             path="/librosComponent"
             element={<LibroComponent response={response}/>}
           />
+                 <Route
+            path="/NacionalidadesComponente"
+            element={<NacionalidadComponente response={response}/>}
+          />
         <Route
             path="/descripcionComponent"
             element={<DescripcionComponent 
             response={response} 
             onSearchSuccess={handleSearchSuccess} />}
           />
-
           <Route
             path="/autores"
             element={<AutorBotones />}
@@ -72,6 +77,11 @@ const App = () => {
             path="/formGenero" 
             element={<FormularioGenero />} 
           />
+      <Route 
+  path="/nacionalidad" 
+  element={<NacionalidadBotones onSearchSuccess={handleSearchSuccess} />} 
+/>
+
           <Route 
             path="/formLibro" 
             element={<FormularioLibro />} 

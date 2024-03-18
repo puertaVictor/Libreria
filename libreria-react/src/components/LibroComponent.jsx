@@ -20,8 +20,6 @@ const LibroComponent = ({ response }) => {
     fetchListaGeneros();
   }, []);
 
-
-
   return (
     <div className="container">
       {response.map((libroData, index) => {
@@ -46,14 +44,16 @@ const LibroComponent = ({ response }) => {
           <div
             key={index}
             className="card mb-3"
-            style={{ width: "700px", marginTop: "20px" }}  
+            style={{ width: "100%", maxWidth: "700px", marginTop: "20px" }}  
           >
             <div className="row g-0">
               <div className="col-md-4 d-flex justify-content-center align-items-center">
                 <div
                   style={{
-                    width: "400px",
-                    height: "450px",
+                    width: "100%",
+                    height: "auto",
+                    maxWidth: "400px",
+                    maxHeight: "450px",
                     overflow: "hidden",
                     display: "flex",
                     justifyContent: "center",
@@ -63,7 +63,7 @@ const LibroComponent = ({ response }) => {
                   {libroData[6] ? (
                     <img
                       src={`data:image/jpeg;base64, ${libroData[6]}`}
-                      alt={`Portada de ${libroData[2]}`}
+                      alt={`Portada de ${libroData[0]}`}
                       className="img-fluid"
                       style={{
                         maxWidth: "100%",
@@ -73,8 +73,8 @@ const LibroComponent = ({ response }) => {
                   ) : (
                     <div
                       style={{
-                        width: "100px",
-                        height: "150px",
+                        width: "100%",
+                        height: "100%",
                         backgroundColor: "grey",
                         border: "solid 1px black",
                         display: "flex",
@@ -89,13 +89,13 @@ const LibroComponent = ({ response }) => {
               </div>
               <div className="col-md-8">
                 <div className="card-body">
-                  <h5 className="card-title">Título: {libroData[0]}</h5>
+                  <h5 className="card-title mb-2 ">Título: {libroData[0]}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">
-                    Autor: {libroData[1]}
+                    Autor: {libroData[2]}
                   </h6>
-                  <p className="card-text">Leído: {leido}</p>
-                  <p className="card-text">Fecha de lectura: {fecha}</p>
-                  <p className="card-text">Resumen: {libroData[2]}</p>
+                  <p className="card-text mb-2 ">Leído: {leido}</p>
+                  <p className="card-text mb-2 ">Fecha de lectura: {fecha}</p>
+                  <p className="card-text mb-2 ">Resumen: {libroData[2]}</p>
                 </div>
               </div>
             </div>

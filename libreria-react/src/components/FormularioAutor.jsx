@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {nombresAutor , GuardarAutor} from "../service/autor_service.jsx"
+import {nombresAutor , GuardarAutor } from "../service/autor_service.jsx"
 
 const FormularioAutor = () => {
   const [autor, setAutor] = useState("");

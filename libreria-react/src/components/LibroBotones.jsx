@@ -48,7 +48,7 @@ const LibroBotones = () => {
               return (
                 <div key={index} className="col-md-3 text-center mb-4" style={{ marginTop: "50px" }}>
                   <div style={{ width: "450px", height: "300px", margin: "0 auto", overflow: "hidden" }} className="text-center">
-                    <h3 className="card-text">Titulo:  {tituloLibro}</h3>
+                    <h3 className="card-text">{tituloLibro}</h3>
                     {imagenSrc ? (
                       <img
                         src={imagenSrc}

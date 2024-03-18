@@ -45,6 +45,25 @@ const nombresAutor = async () =>{
   }
 }
 
+const buscarPorNacionalidad = async (nacionalidad) =>{
+  try {
+    const response = await axios.get(`${baseURL}/buscarPorNacionalidad?nacionalidad=${nacionalidad}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error sacando a los autores:', error);
+    throw error;
+  }
+}
+
+const obtenerNacionalidades = async () =>{
+  try {
+    const response = await axios.get(`${baseURL}/obtenerNacionalidades`);
+    return response.data;
+  } catch (error) {
+    console.error('Error sacando a los autores:', error);
+    throw error;
+  }
+}
 // GETS MAPPINGS Autores
 
 const GuardarAutor = async (autorData) => {
@@ -56,4 +75,4 @@ const GuardarAutor = async (autorData) => {
       throw error;
     }
   };
-export { VerAutores , BuscarPorNombre ,  GuardarAutor , ListarAutores , nombresAutor};
+export { VerAutores , BuscarPorNombre ,  GuardarAutor , ListarAutores , nombresAutor , buscarPorNacionalidad , obtenerNacionalidades };

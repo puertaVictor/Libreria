@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { BuscarPorNombre } from "../service/autor_service";
+import { useNavigate , Link} from "react-router-dom";
+import { BuscarPorNombre , buscarPorNacionalidad } from "../service/autor_service";
 import { BuscarPorGenero } from "../service/genero_service";
 import {
   BuscarPorTituloService,
@@ -12,9 +12,9 @@ import {
   faBook,
   faVenusMars,
   faPerson,
-  faCirclePlus
+  faCirclePlus,
+  faFlagUsa
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
 
 
 const Header = ({ onSearchSuccess }) => {
@@ -34,6 +34,9 @@ const Header = ({ onSearchSuccess }) => {
     navigate("/libros");
   };
   
+  const handleNacionalidadButtonClick = () => {
+    navigate("/Nacionalidad");
+  };
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -81,11 +84,22 @@ const Header = ({ onSearchSuccess }) => {
           onSearchSuccess(response);
           navigate("/descripcionComponent");
         } catch (error) {
-          console.error("Error buscando género por nombre:", error);
+          console.error("Error buscando palabras:", error);
         }
-      default:
         break;
+        case "Nacionalidad":
+          try {
+            response = await buscarPorNacionalidad(dato);
+            setSearchResults(response);
+            onSearchSuccess(response);
+            navigate("/nacionalidadComponent");
+          } catch (error) {
+            console.error("Error buscando nacionalidad:", error);
+          }
+          default:
+          break;
     }
+    
   };
 
   return (
@@ -105,6 +119,7 @@ const Header = ({ onSearchSuccess }) => {
             <option value="Libros">Libros</option>
             <option value="Generos">Géneros</option>
             <option value="Descripcion">Buscar por palabras</option>
+            <option value="Descripcion">Nacionalidad</option>
           </select>
         </div>
         <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
@@ -150,6 +165,16 @@ const Header = ({ onSearchSuccess }) => {
           <FontAwesomeIcon icon={faPerson} size="lg" />
           <span> Autores</span>
         </button>
+        
+        <button
+          type="button"
+          className="btn btn-outline-success"
+          onClick={handleNacionalidadButtonClick}
+        >
+          <FontAwesomeIcon icon={faFlagUsa} size="lg" />
+          <span> Nacionalidad</span>
+        </button>
+
         <div className="btn-group" role="group">
           <button
             type="button"

@@ -35,20 +35,40 @@ const DescripcionComponent = ({ response }) => {
                 />
             );
             let resumen = libDescripcion[2];
-            let img = null;
-            if (libDescripcion[6]) {
-                img = `data:image/jpeg;base64, ${libDescripcion[6]}`;
+            let img;
+            if (libDescripcion[3]) {
+              img = <img src={`data:image/jpeg;base64, ${libDescripcion[3]}`} alt="Imagen" 
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+              }}/>;
+            } else {
+              img = (
+                <div
+                  style={{
+                    width: "250px",
+                    height: "325px",
+                    backgroundColor: "grey",
+                    border: "solid 1px black",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}>
+                  Sin imagen
+                </div>
+              );
             }
+
             let fecha = null;
-            if (libDescripcion[5] != null) {
-                fecha = new Date(libDescripcion[5]).toLocaleDateString();
+            if (libDescripcion[4] != null) {
+                fecha = new Date(libDescripcion[4]).toLocaleDateString();
             }
-            let genero = libDescripcion[3];
-            let autor = libDescripcion[1];
+            let genero = libDescripcion[5];
+            let autor = libDescripcion[6];
 
             return (
                 <div className="card" style={{ width: "18rem" }} key={index}>
-                    {img && <img src={img} className="card-img-top" alt="Book cover" />}
+                    {img} 
                     <div className="card-body">
                         <h5 className="card-title">{titulo}</h5>
                         <p className="card-text">{resumen}</p>
