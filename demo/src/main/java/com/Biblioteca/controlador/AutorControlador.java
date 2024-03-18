@@ -50,6 +50,18 @@ public class AutorControlador {
 		return datos;
 	}
 	
+	@GetMapping("/buscarPorNacionalidad")
+	public List<Object[]> buscarPorNacionalidad(@RequestParam("nacionalidad") String nacionalidad){
+		List<Object[]> datos = servicioAutor.buscarPorNacionalidad(nacionalidad);
+		return datos;
+	}
+	
+	@GetMapping("/obtenerNacionalidades")
+	public List<Object[]> ObtenerNacionalidades(){
+		List<Object[]> datos = servicioAutor.ObtenerNacionalidades();
+		return datos;
+	}
+	
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@PostMapping("/guardarAutor")
 	public AutorEntity agregarAutor(@RequestBody AutorEntity autor) {

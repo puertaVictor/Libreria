@@ -32,6 +32,12 @@ public class autorService {
     public List<Object[]> sacarNomrbes() {
     	return autorRepositorio.ListaNombres();
     }
+    public List<Object[]> buscarPorNacionalidad(String nacionalidad){
+    	return autorRepositorio.buscarPorNacionalidad(nacionalidad);
+    }
+    public List<Object[]> ObtenerNacionalidades(){
+    	return autorRepositorio.ObtenerNacionalidades();
+    }
     public AutorEntity guardarAutor(AutorEntity autor) {
     	return autorRepositorio.save(autor);
     }
