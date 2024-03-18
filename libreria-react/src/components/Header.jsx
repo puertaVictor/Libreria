@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate , Link} from "react-router-dom";
-import { BuscarPorNombre , buscarPorNacionalidad } from "../service/autor_service";
+import { useNavigate, Link } from "react-router-dom";
+import { BuscarPorNombre, buscarPorNacionalidad } from "../service/autor_service";
 import { BuscarPorGenero } from "../service/genero_service";
 import {
   BuscarPorTituloService,
@@ -15,7 +15,6 @@ import {
   faCirclePlus,
   faFlagUsa
 } from "@fortawesome/free-solid-svg-icons";
-
 
 const Header = ({ onSearchSuccess }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -87,23 +86,30 @@ const Header = ({ onSearchSuccess }) => {
           console.error("Error buscando palabras:", error);
         }
         break;
-        case "Nacionalidad":
-          try {
-            response = await buscarPorNacionalidad(dato);
-            setSearchResults(response);
-            onSearchSuccess(response);
-            navigate("/nacionalidadComponent");
-          } catch (error) {
-            console.error("Error buscando nacionalidad:", error);
-          }
-          default:
-          break;
+      case "Nacionalidad":
+        try {
+          response = await buscarPorNacionalidad(dato);
+          setSearchResults(response);
+          onSearchSuccess(response);
+          navigate("/nacionalidadComponent");
+        } catch (error) {
+          console.error("Error buscando nacionalidad:", error);
+        }
+        break;
+      default:
+        break;
     }
-    
+  };
+
+  const handleGoToHomePage = () => {
+    navigate("/");
   };
 
   return (
     <nav className="header-container">
+      <button onClick={handleGoToHomePage} className="btn btn-home">
+        <img src="/src/assets/logos/libreria.jpg" alt="Imagen" style={{ width: "150px", height: "50px", marginTop: "15px" }} />
+      </button>
       <div className="container-fluid d-flex align-items-center justify-content-between w-100 py-3">
         <div className="d-flex align-items-center">
           <select
@@ -119,7 +125,7 @@ const Header = ({ onSearchSuccess }) => {
             <option value="Libros">Libros</option>
             <option value="Generos">Géneros</option>
             <option value="Descripcion">Buscar por palabras</option>
-            <option value="Descripcion">Nacionalidad</option>
+            <option value="Nacionalidad">Nacionalidad</option>
           </select>
         </div>
         <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
@@ -187,19 +193,19 @@ const Header = ({ onSearchSuccess }) => {
           </button>
           <ul className="dropdown-menu">
             <li>
-            <Link to="/formAutor" className="dropdown-item">
-              Autor
-            </Link>
+              <Link to="/formAutor" className="dropdown-item">
+                Autor
+              </Link>
             </li>
             <li>
-            <Link to="/formGenero" className="dropdown-item">
-              Género
-            </Link>
+              <Link to="/formGenero" className="dropdown-item">
+                Género
+              </Link>
             </li>
             <li>
-            <Link to="/formLibro" className="dropdown-item">
-              Libro
-            </Link>
+              <Link to="/formLibro" className="dropdown-item">
+                Libro
+              </Link>
             </li>
           </ul>
         </div>

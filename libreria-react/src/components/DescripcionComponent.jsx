@@ -47,7 +47,7 @@ const DescripcionComponent = ({ response }) => {
                 <div
                   style={{
                     width: "250px",
-                    height: "325px",
+                    height: "350px",
                     backgroundColor: "grey",
                     border: "solid 1px black",
                     display: "flex",
